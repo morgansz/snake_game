@@ -1,0 +1,51 @@
+classDiagram
+    class Game {
+        -int score
+        -int high_score
+        -int speed
+        -int width
+        -int height
+        -deque snake_body
+        -tuple food_position
+        -bool game_over
+        +__init__(self, width: int, height: int)
+        +reset(self)
+        +draw(self, window)
+        +update(self, window)
+        +handle_input(self, key)
+        +run(self)
+    }
+
+    class Snake {
+        -deque body
+        -str direction
+        +__init__(self, start_position)
+        +move(self, direction)
+        +eat(self)
+        +collide(self, width, height)
+    }
+
+    class Food {
+        -tuple position
+        +__init__(self, width, height)
+        +generate(self, snake_body)
+    }
+
+    class Window {
+        -int width
+        -int height
+        -curses window
+        +__init__(self, width: int, height: int)
+        +draw_border(self)
+        +draw_text(self, text, x, y)
+        +draw_snake(self, snake_body)
+        +draw_food(self, food_position)
+        +refresh(self)
+        +close(self)
+    }
+
+    Game "1" -- "1" Snake: has
+    Game "1" -- "1" Food: has
+    Game "1" -- "1" Window: uses
+    Snake "1" -- "1" Food: eats
+    Window "1" -- "1" curses: uses

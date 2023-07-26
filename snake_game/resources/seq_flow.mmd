@@ -1,0 +1,20 @@
+sequenceDiagram
+    participant M as Main
+    participant G as Game
+    participant W as Window
+    participant S as Snake
+    participant F as Food
+
+    M->>G: Create game instance with specified width and height
+    G->>W: Create window instance with specified width and height
+    G->>G: Reset game state
+    G->>W: Draw game screen
+    G->>W: Refresh window
+    loop
+        M->>G: Get user input
+        G->>G: Handle input
+        G->>G: Update game state
+        G->>W: Draw game screen
+        G->>W: Refresh window
+    end
+    G->>W: Close window
